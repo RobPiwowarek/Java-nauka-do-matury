@@ -58,13 +58,17 @@ public class sortowania {
 	}
 
 	static void babelkowe(int tab[]) {
-		for (int i = 0; i < tab.length; i++)
-			for (int j = 0; j < tab.length; j++) {
-				if (tab[j] > tab[i]) {
-					swap(tab, i, j);
-				}
-
+		int n = tab.length;
+		
+		do {
+		for (int i = 0; i < n-1; i++)
+		{
+			if (tab[i+1]< tab[i])
+				swap(tab, i, i+1);
 			}
+		n--;
+		}
+		while (n > 1);
 
 	}
 
