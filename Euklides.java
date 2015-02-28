@@ -13,6 +13,11 @@ public class Euklides {
 		System.out.println("Najwiekszy wspolny dzielnik to: "
 				+ modulo(rand.nextInt(1000), rand.nextInt(1000)));
 
+		int a = rand.nextInt(1000);
+		int b = rand.nextInt(1000);
+		System.out.println("Liczby: " + a + " i " + b);
+		System.out.println("Najwiekszy wspolny dzielnik to: "
+				+ rekur(a, b));
 	}
 
 	static int odejmowanie(int a, int b) {
@@ -38,4 +43,11 @@ public class Euklides {
 		return a;
 	}
 
+	static int rekur(int a, int b) {
+		if (b == 0)
+			return a;
+		else
+			return rekur(b, a%b);
+	}
+	
 }
