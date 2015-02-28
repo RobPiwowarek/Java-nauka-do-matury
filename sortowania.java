@@ -24,6 +24,7 @@ public class sortowania {
 		System.out.println("3 - scalanie");
 		System.out.println("4 - quicksort");
 		System.out.println("5 - wstawianie");
+		System.out.println("6 - kubelkowe");
 		alg = scan.nextInt();
 
 		switch (alg) {
@@ -42,6 +43,9 @@ public class sortowania {
 		case 5:
 			tab = wstawianie(tab);
 			break;
+		case 6:
+			tab = kubelkowe(tab);
+			break;
 		default:
 			System.out.println("MISTAKE!");
 		}
@@ -58,18 +62,10 @@ public class sortowania {
 	}
 
 	static void babelkowe(int tab[]) {
-		int n = tab.length;
-		
-		do {
-		for (int i = 0; i < n-1; i++)
-		{
-			if (tab[i+1]< tab[i])
-				swap(tab, i, i+1);
-			}
-		n--;
-		}
-		while (n > 1);
-
+		for (int i = 0; i < tab.length-1; i++)
+			for (int j = 0; j < tab.length-1-i; j++)
+				if (tab[j+1]< tab[j])
+					swap(tab, j, j+1);
 	}
 
 	static int min_index(int tab[], int i) {
@@ -191,4 +187,44 @@ public class sortowania {
 		return temp;
 	}
 
+	static int max(int tab[])
+	{
+		int max = tab[0];
+		for (int i = 0; i < tab.length; i++)
+			if (max < tab[i])
+				max = tab[i];
+		
+		return max;
+	}
+	
+	static int min(int tab[])
+	{
+		int min = tab[0];
+		for (int i = 0; i < tab.length; i++)
+			if (min > tab[i])
+				min = tab[i];
+		
+		return min;
+	}
+	
+	static int[] kubelkowe(int tab[])
+	{
+		int offset = min(tab);
+		int max = max(tab);
+		
+		int temp[] = new int[max+1];
+		
+		for (int i = 0; i < tab.length; i++)
+			temp[tab[i]]++;
+		
+		for (int i = offset, j = 0; i < temp.length && j < tab.length;)
+			if (temp[i]-- != 0)
+				tab[j++] = i;
+			else
+				i++;
+		
+		return tab; 
+	}
+	
+	
 }
